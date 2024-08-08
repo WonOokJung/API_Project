@@ -20,7 +20,7 @@ INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
 // SAL: 주석언어, 주석대신 의미를 전달하기 위해 사용 _IN_ 데이터가 입력되는  _In_opt_ 부가적인
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance, /*실행된 프로세스의 시작주소*/
-    _In_opt_ HINSTANCE hPrevInstance, /*이전 프로세스의 시작주소: 프로그램창은 여러개 실행시킬수 있기 때문에: 단 과거의 잔재이다.(초창기 윈도우)*/
+    _In_opt_ HINSTANCE hPrevInstance, //이전 프로세스의 시작주소: 프로그램창은 여러개 실행시킬수 있기 때문에: 단 과거의 잔재이다.(초창기 윈도우)
     _In_ LPWSTR    lpCmdLine,
     _In_ int       nCmdShow)
 {
@@ -47,6 +47,27 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, /*실행된 프로세스의 시�
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_WINAPIPROJECT));
 
     MSG msg;
+
+    while (true)
+    {
+        if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+        {
+            if (msg.message == WM_QUIT)
+                break;
+
+            if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+            {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
+        }
+        else
+        {
+            
+            // 메세지가 없을 경우 여기서처리
+            // 게임 로직이 들어가면 된다
+        }
+    }
 
     // 기본 메시지 루프입니다:
     while (GetMessage(&msg, nullptr, 0, 0))
@@ -154,6 +175,37 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hWnd, &ps);
+
+        // 파란브러쉬 생성
+        HBRUSH newBrush = CreateSolidBrush(RGB(0, 0 ,255));
+        // 파란 브러쉬 dc생성 및 흰색 브러쉬 반환
+        HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, newBrush);
+
+        Rectangle(hdc, 10, 10, 100, 100);
+
+        //다시 원본브러쉬선택
+        SelectObject(hdc, oldBrush);
+
+        // 빨간팬 생성
+        HPEN redPen = CreatePen(PS_SOLID, 2, RGB(0, 0, 255));
+
+        HPEN oldPen = (HPEN)SelectObject(hdc, redPen);
+
+        Ellipse(hdc, 10, 10, 100, 100);
+
+        SelectObject(hdc, oldPen);
+
+        // 파랑 브러쉬 삭제
+        DeleteObject(newBrush);
+        DeleteObject(redPen);
+
+        HBRUSH grayBrush = (HBRUSH)GetStockObject(GRAY_BRUSH);
+        oldBrush = (HBRUSH)SelectObject(hdc, grayBrush);
+
+        Rectangle(hdc, 200, 200, 300, 300);
+
+        DeleteObject(grayBrush);
+
         // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
         EndPaint(hWnd, &ps);
     }
@@ -161,6 +213,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_DESTROY:
         PostQuitMessage(0);
         break;
+
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
     }
