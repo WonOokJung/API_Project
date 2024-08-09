@@ -1,6 +1,30 @@
 #pragma once
-class Application
+#include "ap_GameObject.h"
+
+namespace ap
 {
-	int a = 100;
-};
+	class Application
+	{
+	public:
+		void Initialize(HWND hwnd);
+		void Run();
+
+		void Update();
+		void LateUpdate();
+		void Render();
+
+	private:
+		HWND mHwnd;
+		HDC mHdc;
+
+		float mSpeed;
+
+
+		GameObject mPlayer;
+
+	public:
+		Application();
+		~Application();
+	};
+}
 

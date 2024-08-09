@@ -6,7 +6,7 @@
 #include "..\\APIEngine_SOURCE\ap_Application.h"
 
 //#pragma comment (lib, "..\\x64\\Debug\\API_Engine.lib")
-Application app;
+ap::Application app;
 
 #define MAX_LOADSTRING 100
 
@@ -70,18 +70,19 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, /*실행된 프로세스의 시�
             
             // 메세지가 없을 경우 여기서처리
             // 게임 로직이 들어가면 된다
+            app.Run();
         }
     }
 
-    // 기본 메시지 루프입니다:
-    while (GetMessage(&msg, nullptr, 0, 0))
-    {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
-        {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-        }
-    }
+    //// 기본 메시지 루프입니다:
+    //while (GetMessage(&msg, nullptr, 0, 0))
+    //{
+    //    if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+    //    {
+    //        TranslateMessage(&msg);
+    //        DispatchMessage(&msg);
+    //    }
+    //}
 
     return (int)msg.wParam;
 }
@@ -133,6 +134,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
+    app.Initialize(hWnd);
+
     if (!hWnd)
     {
         return FALSE;
@@ -179,36 +182,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hWnd, &ps);
-
-        // 파란브러쉬 생성
-        HBRUSH newBrush = CreateSolidBrush(RGB(0, 0 ,255));
-        // 파란 브러쉬 dc생성 및 흰색 브러쉬 반환
-        HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, newBrush);
-
-        Rectangle(hdc, 10, 10, 100, 100);
-
-        //다시 원본브러쉬선택
-        SelectObject(hdc, oldBrush);
-
-        // 빨간팬 생성
-        HPEN redPen = CreatePen(PS_SOLID, 2, RGB(0, 0, 255));
-
-        HPEN oldPen = (HPEN)SelectObject(hdc, redPen);
-
-        Ellipse(hdc, 10, 10, 100, 100);
-
-        SelectObject(hdc, oldPen);
-
-        // 파랑 브러쉬 삭제
-        DeleteObject(newBrush);
-        DeleteObject(redPen);
-
-        HBRUSH grayBrush = (HBRUSH)GetStockObject(GRAY_BRUSH);
-        oldBrush = (HBRUSH)SelectObject(hdc, grayBrush);
-
-        Rectangle(hdc, 200, 200, 300, 300);
-
-        DeleteObject(grayBrush);
 
         // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
         EndPaint(hWnd, &ps);
