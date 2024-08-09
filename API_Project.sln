@@ -7,7 +7,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WinAPIProject", "WinAPIProj
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "API_Engine", "API_Engine\API_Engine.vcxproj", "{22C27426-3F92-4E83-81CA-ED025A8AE087}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "APIEngine_SOURCE", "APIEngine_SOURCE\APIEngine_SOURCE.vcxitems", "{8BF38D42-C755-4DA5-8D6D-6D54092AB746}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		APIEngine_SOURCE\APIEngine_SOURCE.vcxitems*{22c27426-3f92-4e83-81ca-ed025a8ae087}*SharedItemsImports = 4
+		APIEngine_SOURCE\APIEngine_SOURCE.vcxitems*{8bf38d42-c755-4da5-8d6d-6d54092ab746}*SharedItemsImports = 9
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86

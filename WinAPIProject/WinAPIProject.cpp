@@ -3,6 +3,10 @@
 
 #include "framework.h"
 #include "WinAPIProject.h"
+#include "..\\APIEngine_SOURCE\ap_Application.h"
+
+//#pragma comment (lib, "..\\x64\\Debug\\API_Engine.lib")
+Application app;
 
 #define MAX_LOADSTRING 100
 
