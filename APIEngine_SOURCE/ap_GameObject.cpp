@@ -1,27 +1,32 @@
 #include "ap_GameObject.h"
+#include "Input_Manager.h"
+#include "Time.h"
+
+
 
 namespace ap
 {
 	void GameObject::Update()
 	{
-		if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+		const float speed = 100.0f;
+		if (Input_Manager::GetKey(eKeyCode::A) || Input_Manager::GetKey(eKeyCode::LEFT))
 		{
-			mX -= 0.01f;
+			mX -= speed * Time::Deltatime();
 		}
 
-		if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+		if (Input_Manager::GetKey(eKeyCode::D) || Input_Manager::GetKey(eKeyCode::RIGHT))
 		{
-			mX += 0.01f;
+			mX += speed * Time::Deltatime();
 		}
 
-		if (GetAsyncKeyState(VK_UP) & 0x8000)
+		if (Input_Manager::GetKey(eKeyCode::W) || Input_Manager::GetKey(eKeyCode::UP))
 		{
-			mY -= 0.01f;
+			mY -= speed * Time::Deltatime();
 		}
 
-		if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+		if (Input_Manager::GetKey(eKeyCode::S) || Input_Manager::GetKey(eKeyCode::DOWN))
 		{
-			mY += 0.01f;
+			mY += speed * Time::Deltatime();
 		}
 	}
 	void GameObject::LateUpdate()
@@ -35,7 +40,7 @@ namespace ap
 		// 파란 브러쉬 dc생성 및 흰색 브러쉬 반환
 		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, newBrush);
 
-		Rectangle(hdc, 10 + mX, 10 + mY, 100 + mX, 100 + mY);
+		Rectangle(hdc, 100 + mX, 100 + mY, 150 + mX, 150 + mY);
 
 		//다시 원본브러쉬선택
 		SelectObject(hdc, oldBrush);
