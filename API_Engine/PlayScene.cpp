@@ -6,6 +6,7 @@
 #include "SpriteRenderer.h"
 #include "Input_Manager.h"
 #include "Scene_Manager.h"
+#include "apObject.h"
 
 namespace ap
 {
@@ -18,7 +19,7 @@ namespace ap
 
 	void PlayScene::Initialize()
 	{
-		bg = new Player();
+		/*bg = new Player();
 		Transform* tr
 			= bg->AddComponent<Transform>();
 		tr->SetPos(Vector2(0, 0));
@@ -30,7 +31,14 @@ namespace ap
 		sr->SetName(L"SR");
 		sr->ImageLoad(L"C:\\Users\\dnr16\\source\\repos\\API_Project\\Resources\\CloudOcean.png");
 
-		AddGameObject(bg, eLayerType::BackGround);
+		AddGameObject(bg, eLayerType::BackGround);*/
+
+		bg = object::Instantiate<Player>(enums::eLayerType::BackGround, Vector2(100.0f, 100.0f));
+
+		SpriteRenderer* sr
+			= bg->AddComponent<SpriteRenderer>();
+		sr->SetName(L"SR");
+		sr->ImageLoad(L"C:\\Users\\dnr16\\source\\repos\\API_Project\\Resources\\CloudOcean.png");
 	}
 	void PlayScene::Update()
 	{
@@ -53,8 +61,8 @@ namespace ap
 	}
 	void PlayScene::OnEnter()
 	{
-		Transform* tr = bg->GetComponent<Transform>();
-		tr->SetPos(Vector2(0, 0));
+		/*Transform* tr = bg->GetComponent<Transform>();
+		tr->SetPos(Vector2(0, 0));*/
 	}
 	void PlayScene::OnExit()
 	{

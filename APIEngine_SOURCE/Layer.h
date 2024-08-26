@@ -15,7 +15,7 @@ namespace ap
 
 		void AddGameObject(GameObject* gameObj);
 	private:
-		eLayerType mType;
+		//eLayerType mType;
 		std::vector<GameObject*> vGameObject;
 
 	public:

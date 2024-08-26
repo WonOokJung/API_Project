@@ -1,6 +1,7 @@
 #include "ap_GameObject.h"
 #include "Input_Manager.h"
 #include "Time.h"
+#include "Transform.h"
 
 
 
@@ -8,6 +9,7 @@ namespace ap
 {
 	GameObject::GameObject()
 	{
+		initializedTransform();
 	}
 
 	GameObject::~GameObject()
@@ -48,6 +50,11 @@ namespace ap
 		{
 			comp->Render(hdc);
 		}
+	}
+
+	void GameObject::initializedTransform()
+	{
+		AddComponent<Transform>();
 	}
 
 	/*

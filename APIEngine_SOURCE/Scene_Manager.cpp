@@ -23,4 +23,24 @@ namespace ap
 	{
 		mActiveScene->Render(hdc);
 	}
+	Scene* Scene_Manager::LoadScene(const std::wstring& name)
+
+	{
+		if (mActiveScene)
+		{
+			mActiveScene->OnExit();
+		}
+
+		std::map<std::wstring, Scene*>::iterator iter
+			= mScene.find(name);
+
+		if (iter == mScene.end())
+			return nullptr;
+
+		mActiveScene = iter->second;
+
+		mActiveScene->OnEnter();
+
+		return iter->second;
+	}
 }

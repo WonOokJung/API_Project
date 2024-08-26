@@ -5,9 +5,9 @@ namespace ap
 	Scene::Scene()
 		: vLayers{}
 	{
-		vLayers.resize((UINT)eLayerType::Max);
+		vLayers.resize((UINT)enums::eLayerType::Max);
 	
-		for (size_t i = 0u; i < (UINT)eLayerType::Max; ++i)
+		for (size_t i = 0u; i < (UINT)enums::eLayerType::Max; ++i)
 		{
 			vLayers[i] = new Layer;
 		}
@@ -75,7 +75,7 @@ namespace ap
 	void Scene::OnExit()
 	{
 	}
-	void Scene::AddGameObject(GameObject* gameObj, const eLayerType layerType)
+	void Scene::AddGameObject(GameObject* gameObj, const enums::eLayerType layerType)
 	{
 		vLayers[(UINT)layerType]->AddGameObject(gameObj);
 	}

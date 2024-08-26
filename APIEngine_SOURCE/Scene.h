@@ -16,7 +16,8 @@ namespace ap
 		virtual void OnEnter();
 		virtual void OnExit();
 
-		void AddGameObject(GameObject* gameObj, const eLayerType layerType);
+		void AddGameObject(GameObject* gameObj, const enums::eLayerType layerType);
+		Layer* GetLayer(const enums::eLayerType layerType) { return vLayers[(UINT)layerType]; }
 
 	private:
 		//std::vector<GameObject*> vGameObject;

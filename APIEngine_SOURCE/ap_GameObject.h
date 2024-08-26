@@ -38,6 +38,8 @@ namespace ap
 			return component;
 		}
 
+	private:
+		void initializedTransform();
 
 	private:
 		// 컴포넌트 목록

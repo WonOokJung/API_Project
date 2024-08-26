@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ap
+namespace ap::enums
 {
 	enum class eLayerType
 	{
