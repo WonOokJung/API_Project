@@ -1,29 +1,47 @@
 #pragma once
 #include "CommonInclude.h"
+#include "Component.h"
 
 namespace ap
 {
 	class GameObject
 	{
 	public:
-		void Update();
-		void LateUpdate();
-		void Render(HDC hdc);
+		virtual void Initialize();
+		virtual void Update();
+		virtual void LateUpdate();
+		virtual void Render(HDC hdc);
 
-		void SetPosition(float x, float y)
+		//void KeyInput();
+
+		template <typename T>
+		T* AddComponent()
 		{
-			mX = x;
-			mY = y;
-		}
-		float GetPositionX() { return mX; }
-		float GetPositionY() { return mY; }
+			T* comp = new T();
+			comp->SetOwner(this);
+			vComponents.push_back(comp);
 
+			return comp;
+		}
+
+		template <typename T>
+		T* GetComponent()
+		{
+			T* component = nullptr;
+			for (Component* comp : vComponents)
+			{
+				component = dynamic_cast<T*>(comp);
+				if (component)
+					break;
+			}
+
+			return component;
+		}
 
 
 	private:
-		// 오브젝트 좌표
-		float mX;
-		float mY;
+		// 컴포넌트 목록
+		std::vector<Component*> vComponents;
 
 	public:
 		GameObject();

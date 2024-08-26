@@ -1,12 +1,16 @@
 ﻿// WinAPIProject.cpp : 애플리케이션에 대한 진입점을 정의합니다.
 //
-
 #include "framework.h"
 #include "WinAPIProject.h"
+
 #include "..\\APIEngine_SOURCE\ap_Application.h"
+#include "..\\API_Engine\LoadScene.h"
 
 //#pragma comment (lib, "..\\x64\\Debug\\API_Engine.lib")
 ap::Application app;
+
+ULONG_PTR gpToken;
+Gdiplus::GdiplusStartupInput gpsi;
 
 #define MAX_LOADSTRING 100
 
@@ -74,6 +78,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, /*실행된 프로세스의 시�
         }
     }
 
+    Gdiplus::GdiplusShutdown(gpToken);
+
+    return (int)msg.wParam;
+
     //// 기본 메시지 루프입니다:
     //while (GetMessage(&msg, nullptr, 0, 0))
     //{
@@ -84,7 +92,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, /*실행된 프로세스의 시�
     //    }
     //}
 
-    return (int)msg.wParam;
+   // return (int)msg.wParam;
 }
 
 
@@ -146,6 +154,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
     ShowWindow(hWnd, nCmdShow);
     UpdateWindow(hWnd);
+
+    Gdiplus::GdiplusStartup(&gpToken, &gpsi, NULL);
+
+    //load Scene
+    ap::LoadScene();
 
     return TRUE;
 }
