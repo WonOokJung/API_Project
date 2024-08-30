@@ -4,6 +4,7 @@
 #include "WinAPIProject.h"
 
 #include "..\\APIEngine_SOURCE\ap_Application.h"
+#include "..\\API_Engine\ResourcesLoad.h"
 #include "..\\API_Engine\LoadScene.h"
 
 //#pragma comment (lib, "..\\x64\\Debug\\API_Engine.lib")
@@ -158,6 +159,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     Gdiplus::GdiplusStartup(&gpToken, &gpsi, NULL);
 
     //load Scene
+    ap::LoadResources();
     ap::LoadScene();
 
     return TRUE;

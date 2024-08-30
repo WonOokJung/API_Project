@@ -18,6 +18,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ap_Application.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ap_GameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Bullet.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Camera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Component.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Entity.h" />
@@ -25,10 +26,14 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Input_Manager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)apMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Layer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Renderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Resource.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Resources.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Scene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Scene_Manager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Script.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)SpriteRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Texture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Time.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Transform.h" />
   </ItemGroup>
@@ -36,15 +41,20 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ap_Application.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ap_GameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Bullet.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Camera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Component.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Entity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Input_Manager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)apMath.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Layer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Renderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Resource.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Resources.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Scene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Scene_Manager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Script.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SpriteRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Texture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Time.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Transform.cpp" />
   </ItemGroup>

@@ -3,6 +3,7 @@
 namespace ap
 {
 	Transform::Transform()
+		: Component(enums::eComponentType::Transform)
 	{
 	}
 	Transform::~Transform()

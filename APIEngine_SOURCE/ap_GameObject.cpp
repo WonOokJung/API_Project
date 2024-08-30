@@ -9,6 +9,7 @@ namespace ap
 {
 	GameObject::GameObject()
 	{
+		vComponents.resize((UINT)enums::eComponentType::End);
 		initializedTransform();
 	}
 
@@ -25,6 +26,10 @@ namespace ap
 	{
 		for (Component* comp : vComponents)
 		{
+			if (comp == nullptr)
+			{
+				continue;
+			}
 			comp->Initialize();
 		}
 	}
@@ -33,6 +38,10 @@ namespace ap
 	{
 		for (Component* comp : vComponents)
 		{
+			if (comp == nullptr)
+			{
+				continue;
+			}
 			comp->Update();
 		}
 		//KeyInput();
@@ -41,6 +50,10 @@ namespace ap
 	{
 		for (Component* comp : vComponents)
 		{
+			if (comp == nullptr)
+			{
+				continue;
+			}
 			comp->LateUpdate();
 		}
 	}
@@ -48,6 +61,10 @@ namespace ap
 	{
 		for (Component* comp : vComponents)
 		{
+			if (comp == nullptr)
+			{
+				continue;
+			}
 			comp->Render(hdc);
 		}
 	}

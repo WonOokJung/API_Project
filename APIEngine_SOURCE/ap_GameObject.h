@@ -19,7 +19,9 @@ namespace ap
 		{
 			T* comp = new T();
 			comp->SetOwner(this);
-			vComponents.push_back(comp);
+
+			vComponents[(UINT)comp->GetType()] = comp;
+			//vComponents.push_back(comp);
 
 			return comp;
 		}

@@ -1,25 +1,20 @@
 #pragma once
-#include "..\\APIEngine_SOURCE\Scene.h"
+#include "Script.h"
 
 namespace ap
 {
-	class PlayScene : public Scene
+	class PlayerScript : public Script
 	{
 	public:
 		void Initialize() override;
 		void Update() override;
 		void LateUpdate() override;
 		void Render(HDC hdc) override;
-
-		void OnEnter() override;
-		void OnExit() override;
-
 	private:
-		class Player* mPlayer;
 
 	public:
-		PlayScene();
-		~PlayScene();
+		PlayerScript();
+		~PlayerScript();
 
 	};
 }
