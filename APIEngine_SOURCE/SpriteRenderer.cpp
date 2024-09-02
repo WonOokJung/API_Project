@@ -38,19 +38,35 @@ namespace ap
 		}
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector2 pos = tr->GetPosition();
+		float rotation = tr->GetRotation();
+		Vector2 Scale = tr->GetScale();
+
 		pos = Renderer::mainCamera->CalculatePosition(pos);
 
 		if (mTexture->GetTextureType() == graphics::Texture::eTextureType::Bmp)
 		{
-			TransparentBlt(hdc, pos.x, pos.y, mTexture->GetWidth() * mSize.x, mTexture->GetHeight() * mSize.y, mTexture->GetHDC()
+			TransparentBlt(hdc, pos.x, pos.y, mTexture->GetWidth() * mSize.x * Scale.x, mTexture->GetHeight() * mSize.y * Scale.y, mTexture->GetHDC()
 				, 0, 0, mTexture->GetWidth(), mTexture->GetHeight(), RGB(255, 0, 255));
 		}
 
 		else if (mTexture->GetTextureType() == graphics::Texture::eTextureType::Png)
 		{
-			Gdiplus::Graphics graphcis(hdc);
-			graphcis.DrawImage(mTexture->GetImage(), 
-					Gdiplus::Rect(pos.x, pos.y, mTexture->GetWidth() * mSize.x, mTexture->GetHeight() * mSize.y));
+			// 내가 원하는 픽셀을 투명화 시킬때
+			Gdiplus::ImageAttributes imgAtt = {};
+			// 투명화 시킬 픽셀의 색 범위 지정
+			imgAtt.SetColorKey(Gdiplus::Color(200, 200, 200), Gdiplus::Color(255, 255, 255));
+
+			Gdiplus::Graphics graphics(hdc);
+
+			graphics.TranslateTransform(pos.x, pos.y);
+			graphics.RotateTransform(rotation);
+			graphics.TranslateTransform(-pos.x, -pos.y);
+
+			graphics.DrawImage(mTexture->GetImage(),
+					Gdiplus::Rect(pos.x, pos.y, mTexture->GetWidth() * mSize.x * Scale.x, mTexture->GetHeight() * mSize.y * Scale.y)
+					, 0, 0
+					, mTexture->GetWidth(), mTexture->GetHeight()
+					, Gdiplus::UnitPixel, nullptr);
 		}
 
 		//Gdiplus::Graphics graphcis(hdc);

@@ -36,8 +36,4 @@
       <Filter>Script</Filter>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-    <None Include="ClassDiagram2.cd" />
-  </ItemGroup>
 </Project>

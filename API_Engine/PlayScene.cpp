@@ -39,16 +39,36 @@ namespace ap
 		mPlayer = object::Instantiate<Player>(enums::eLayerType::Player);
 		mPlayer->AddComponent<PlayerScript>();
 
+		//graphics::Texture* catTexture = Resources::Find<graphics::Texture>(L"MapleEffect");
+		//Animator* animator = mPlayer->AddComponent<Animator>();
+		//animator->CreateAnimation(L"CatFrontMove", catTexture
+		//	, Vector2(0.0f, 0.0f), Vector2(386.0f, 246.0f), Vector2::Zero, 8, 0.1f);
+
 		graphics::Texture* catTexture = Resources::Find<graphics::Texture>(L"Cat");
 		Animator* animator = mPlayer->AddComponent<Animator>();
-		animator->CreateAnimation(L"CatFrontMove", catTexture
+		animator->CreateAnimation(L"DownWalk", catTexture
 			, Vector2(0.0f, 0.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		animator->CreateAnimation(L"RightWalk", catTexture
+			, Vector2(0.0f, 32.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		animator->CreateAnimation(L"UpWalk", catTexture
+			, Vector2(0.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		animator->CreateAnimation(L"LeftWalk", catTexture
+			, Vector2(0.0f, 96.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		animator->CreateAnimation(L"SitDown", catTexture
+			, Vector2(0.0f, 128.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		animator->CreateAnimation(L"Grooming", catTexture
+			, Vector2(0.0f, 160.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
 
-		animator->PlayAnimation(L"CatFrontMove", true);
+		animator->PlayAnimation(L"SitDown", false);
 
-		GameObject* backGround = object::Instantiate<GameObject>(enums::eLayerType::BackGround);
+
+		mPlayer->GetComponent<Transform>()->SetPos(Vector2(100.0f, 100.0f));
+		mPlayer->GetComponent<Transform>()->SetScale(Vector2(2.0f, 2.0f));
+		mPlayer->GetComponent<Transform>()->SetRotation(45.0f);
+
+		GameObject* backGround = object::Instantiate<GameObject>(enums::eLayerType::Particle);
 		SpriteRenderer* bg = backGround->AddComponent<SpriteRenderer>();
-		graphics::Texture* bgTexture = Resources::Find<graphics::Texture>(L"BG");
+		graphics::Texture* bgTexture = Resources::Find<graphics::Texture>(L"Bubble");
 		bg->SetTexture(bgTexture);
 
 

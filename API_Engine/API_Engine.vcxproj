@@ -32,10 +32,6 @@
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-    <None Include="ClassDiagram2.cd" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

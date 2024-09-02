@@ -3,6 +3,7 @@
 #include "Transform.h"
 #include "Time.h"
 #include "ap_GameObject.h"
+#include "Animator.h"
 
 namespace ap
 {
@@ -18,39 +19,87 @@ namespace ap
 	}
 	void PlayerScript::Update()
 	{
-		if (Input_Manager::GetKey(eKeyCode::D))
+		if (mAnimator == nullptr)
 		{
-			Transform* tr = GetOwner()->GetComponent<Transform>();
-			Vector2 pos = tr->GetPosition();
-			pos.x += 100.0f * Time::Deltatime();
-			tr->SetPos(pos);
+			mAnimator = GetOwner()->GetComponent<Animator>();
 		}
-		if (Input_Manager::GetKey(eKeyCode::A))
+
+		switch (mState)
 		{
-			Transform* tr = GetOwner()->GetComponent<Transform>();
-			Vector2 pos = tr->GetPosition();
-			pos.x -= 100.0f * Time::Deltatime();
-			tr->SetPos(pos);
+		case ap::PlayerScript::eState::SitDown:
+			sitDown();
+			break;
+		case ap::PlayerScript::eState::Walk:
+			move();
+			break;
+		case ap::PlayerScript::eState::Sleep:
+			break;
+		case ap::PlayerScript::eState::Attack:
+			break;
+		default:
+			break;
 		}
-		if (Input_Manager::GetKey(eKeyCode::S))
-		{
-			Transform* tr = GetOwner()->GetComponent<Transform>();
-			Vector2 pos = tr->GetPosition();
-			pos.y += 100.0f * Time::Deltatime();
-			tr->SetPos(pos);
-		}
-		if (Input_Manager::GetKey(eKeyCode::W))
-		{
-			Transform* tr = GetOwner()->GetComponent<Transform>();
-			Vector2 pos = tr->GetPosition();
-			pos.y -= 100.0f * Time::Deltatime();
-			tr->SetPos(pos);
-		}
+
 	}
 	void PlayerScript::LateUpdate()
 	{
 	}
 	void PlayerScript::Render(HDC hdc)
 	{
+	}
+	void PlayerScript::sitDown()
+	{
+		if (Input_Manager::GetKeyDown(eKeyCode::D))
+		{
+			mState = ap::PlayerScript::eState::Walk;
+			mAnimator->PlayAnimation(L"RightWalk", true);
+		}
+		if (Input_Manager::GetKeyDown(eKeyCode::A))
+		{
+			mState = ap::PlayerScript::eState::Walk;
+			mAnimator->PlayAnimation(L"LeftWalk", true);
+		}
+		if (Input_Manager::GetKeyDown(eKeyCode::S))
+		{
+			mState = ap::PlayerScript::eState::Walk;
+			mAnimator->PlayAnimation(L"DownWalk", true);
+		}
+		if (Input_Manager::GetKeyDown(eKeyCode::W))
+		{
+			mState = ap::PlayerScript::eState::Walk;
+			mAnimator->PlayAnimation(L"UpWalk", true);
+		}
+	}
+	void PlayerScript::move()
+	{
+		Transform* tr = GetOwner()->GetComponent<Transform>();
+		Vector2 pos = tr->GetPosition();
+
+		if (Input_Manager::GetKey(eKeyCode::D))
+		{
+			pos.x += 100.0f * Time::Deltatime();
+		}
+		if (Input_Manager::GetKey(eKeyCode::A))
+		{
+			pos.x -= 100.0f * Time::Deltatime();
+		}
+		if (Input_Manager::GetKey(eKeyCode::S))
+		{
+			pos.y += 100.0f * Time::Deltatime();
+		}
+		if (Input_Manager::GetKey(eKeyCode::W))
+		{
+			pos.y -= 100.0f * Time::Deltatime();
+		}
+
+		tr->SetPos(pos);
+
+		if (Input_Manager::GetKeyUp(eKeyCode::D) || Input_Manager::GetKeyUp(eKeyCode::A)
+			|| Input_Manager::GetKeyUp(eKeyCode::S) || Input_Manager::GetKeyUp(eKeyCode::W))
+		{
+			mState = ap::PlayerScript::eState::SitDown;
+			mAnimator->PlayAnimation(L"SitDown", false);
+		}
+
 	}
 }
