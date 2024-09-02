@@ -11,6 +11,7 @@
 #include "Resources.h"
 #include "PlayerScript.h"
 #include "Renderer.h"
+#include "Animator.h"
 
 namespace ap
 {
@@ -35,12 +36,15 @@ namespace ap
 		Renderer::mainCamera = cameraComp;
 		//camera->AddComponent<PlayerScript>();
 
-		mPlayer = object::Instantiate<Player>(enums::eLayerType::Player/*, Vector2(100.0f, 100.0f)*/);
-		SpriteRenderer* sr = mPlayer->AddComponent<SpriteRenderer>();
-		graphics::Texture* packMan = Resources::Find<graphics::Texture>(L"PackMan");
-		sr->SetSize(Vector2(2.0f, 2.0f));
-		sr->SetTexture(packMan);
+		mPlayer = object::Instantiate<Player>(enums::eLayerType::Player);
 		mPlayer->AddComponent<PlayerScript>();
+
+		graphics::Texture* catTexture = Resources::Find<graphics::Texture>(L"Cat");
+		Animator* animator = mPlayer->AddComponent<Animator>();
+		animator->CreateAnimation(L"CatFrontMove", catTexture
+			, Vector2(0.0f, 0.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+
+		animator->PlayAnimation(L"CatFrontMove", true);
 
 		GameObject* backGround = object::Instantiate<GameObject>(enums::eLayerType::BackGround);
 		SpriteRenderer* bg = backGround->AddComponent<SpriteRenderer>();

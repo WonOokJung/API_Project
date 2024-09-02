@@ -10,7 +10,7 @@ namespace ap
 		Scene_Manager::CreateScene<TitleScene>(L"TitleScene");
 		Scene_Manager::CreateScene<PlayScene>(L"PlayScene");
 
-		Scene_Manager::LoadScene(L"TitleScene");
-		//Scene_Manager::LoadScene(L"PlayScene");
+		//Scene_Manager::LoadScene(L"TitleScene");
+		Scene_Manager::LoadScene(L"PlayScene");
 	}
 }

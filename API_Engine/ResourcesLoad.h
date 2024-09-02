@@ -8,5 +8,7 @@ namespace ap
 	{
 		Resources::Load<graphics::Texture>(L"BG", L"C:\\Users\\dnr16\\source\\repos\\API_Project\\Resources\\CloudOcean.png");
 		Resources::Load<graphics::Texture>(L"PackMan", L"C:\\Users\\dnr16\\source\\repos\\API_Project\\Resources\\PackMan.png");
+		Resources::Load<graphics::Texture>(L"Chicken", L"C:\\Users\\dnr16\\source\\repos\\API_Project\\Resources\\SpriteImg\\AlphaChicken.bmp");
+		Resources::Load<graphics::Texture>(L"Cat", L"C:\\Users\\dnr16\\source\\repos\\API_Project\\Resources\\SpriteImg\\AlphaCat.bmp");
 	}
 }

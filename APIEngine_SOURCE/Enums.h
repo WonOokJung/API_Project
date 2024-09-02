@@ -6,6 +6,7 @@ namespace ap::enums
 	{
 		Transform,
 		SpriteRenderer,
+		Animator,
 		Script,
 		Camera,
 		End,
@@ -23,6 +24,7 @@ namespace ap::enums
 	{
 		Texture,
 		Audioclip,
+		Animation,
 		Prefab,
 		End,
 	};
